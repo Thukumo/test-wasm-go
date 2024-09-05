@@ -18,7 +18,7 @@
             .then(scriptContent => {
                 const scriptElement = document.createElement("script");
                 scriptElement.textContent = scriptContent;
-                eval(scriptContent);
+                document.body.appendChild(scriptElement);
                 const go = new Go();
 		WebAssembly.instantiateStreaming(fetch("main.wasm"), go.importObject).then((result) => {
 			go.run(result.instance);
