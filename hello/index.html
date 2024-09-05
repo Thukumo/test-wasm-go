@@ -9,7 +9,12 @@
 	<h1>Go WASM Example</h1>
     <script>
         fetch("https://raw.githubusercontent.com/golang/go/master/lib/wasm/wasm_exec.js")
-            .then(response => response.text())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error status: ${response.status}`);
+                }
+                return response.text();
+            })
             .then(scriptContent => {
                 const scriptElement = document.createElement("script");
                 scriptElement.textContent = scriptContent;
@@ -19,7 +24,10 @@
 			go.run(result.instance);
 		});
             })
-            .catch(error => console.error("Error fetching the script:", error));
+            .catch(error => {
+                console.error("Error fetching the script:", error);
+                alert("処理中にエラーが発生しました。 エラー内容: "+error.message);
+            });
 	</script>
 </body>
 </html>
