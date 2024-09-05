@@ -1,3 +1,5 @@
 build.sh
 hoge.bat
-public.txt
+ig.txt
+go.mod
+main.go
